@@ -1,0 +1,40 @@
+SELECT * FROM Public."Matches";
+
+--matches won per season
+select season,count(*)
+from Public."Matches"
+group by season
+order by season;
+
+-- matches won per team in all seasons 
+select COALESCE(winner,'Tied') as winner,count(*)
+from Public."Matches"
+group by winner;
+
+select * from Deliveries;
+
+--Extra runs in year 2016
+select bowling_team,sum(extra_runs) as extras
+from Public."Deliveries"
+where match_id between 577 and 637 
+group by bowling_team;
+
+--Top 10 Bowler economies in IPL 2015
+select bowler,CAST(sum(total_runs)-sum(legbye_runs)-sum(bye_runs) AS FLOAT)*6/(count(*)-sum(wide_runs)-sum(noball_runs)) as economy
+from Public."Deliveries" 
+where match_id between 518 and 576
+group by bowler
+order by economy
+LIMIT 10;
+
+
+--Sixes per team in IPL 2016
+select batting_team,count(*) as sixes
+from Public."Deliveries"
+where (match_id between 577 and 637) and total_runs=6
+group by batting_team
+
+
+
+
+
