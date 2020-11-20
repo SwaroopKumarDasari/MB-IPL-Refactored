@@ -1,0 +1,40 @@
+SELECT * FROM IPLProject.Matches;
+
+select season,count(*)
+from Matches
+group by season
+order by season;
+
+
+select if(winner !='', winner, 'Tied') as winner,count(*)
+from Matches
+group by winner;
+
+select * from Deliveries;
+
+select bowling_team,sum(extra_runs) as extras
+from Deliveries
+where match_id between 577 and 637 
+group by bowling_team;
+
+
+
+select bowler,(sum(total_runs)-sum(legbye_runs)-sum(bye_runs))/((count(*)-sum(wide_runs)-sum(noball_runs))/6) as economy
+from Deliveries
+where match_id between 518 and 576
+group by bowler
+order by economy
+LIMIT 10;
+
+
+
+
+
+select batting_team,count(*) as sixes
+from Deliveries
+where (match_id between 577 and 637) and total_runs=6
+group by batting_team
+
+
+
+
