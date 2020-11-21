@@ -12,7 +12,7 @@ public class Main {
 
     private static final String url="jdbc:postgresql://localhost:5432/IPLProject";
     private static final String name="postgres";
-    private static final String password="somu9042";
+    private static final String password="yourPassword";
 
     public static void main(String[] args) {
         List<Match> matches = getMatches();
